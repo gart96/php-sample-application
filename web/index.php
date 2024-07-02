@@ -1,5 +1,8 @@
 <?php
 
+require __DIR__ . '/../autoloader.php';
+require __DIR__ . '/../vendor/autoload.php';
+
 $lastJoinedUsers = (require "dic/users.php")->getLastJoined();
 
 switch (require "dic/negotiated_format.php") {

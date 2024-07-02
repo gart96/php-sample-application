@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  database:
+    image: guramirezt/clouxter-bd-php
+    restart: always
+    ports:
+      - "3306:3306"
+    command: ["--init-file", "/docker-entrypoint-initdb.d/init-script.sql"]
+    volumes:
+      - data:/var/lib/mysql
+      - - ./sql:/docker-entrypoint-initdb.d
+    
+  webpage:
+    depends_on:
+      - database
+    image: guramirezt/clouxter-web-php
+    container_name: web-php
+    ports:
+      - "3000:80"
+    restart: always
+
+volumes:
+  data:
+    driver: local
